@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/stationsListFragment">
+
+    <fragment
+        android:id="@+id/stationsListFragment"
+        android:name="com.lekstel.aqi.stations.presentation.view.StationsListFragment"
+        android:label="fragment_stations_list"
+        tools:layout="@layout/fragment_stations_list">
+        <action
+            android:id="@+id/stationsListFragment_to_filtersFragment"
+            app:destination="@+id/filtersFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/filtersFragment"
+        android:name="com.lekstel.aqi.filters.presentation.view.FiltersFragment"
+        android:label="filters_fragment"
+        tools:layout="@layout/fragment_filters">
+    </dialog>
+
+</navigation>

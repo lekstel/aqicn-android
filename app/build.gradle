@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -36,10 +37,14 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$libVersions.coreKtx"
-    implementation "androidx.appcompat:appcompat:$libVersions.appcompat"
-    implementation "com.google.android.material:material:$libVersions.material"
-    implementation "androidx.constraintlayout:constraintlayout:$libVersions.constraintlayout"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libVersions.coroutines"
+
+    implementation "androidx.appcompat:appcompat:$libVersions.appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$libVersions.constraintlayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$libVersions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$libVersions.navigation"
+    implementation "com.google.android.material:material:$libVersions.material"
+
     implementation "com.google.dagger:dagger:$libVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libVersions.dagger"
 
