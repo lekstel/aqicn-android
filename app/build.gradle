@@ -45,6 +45,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$libVersions.navigation"
     implementation "com.google.android.material:material:$libVersions.material"
 
+    implementation "androidx.room:room-runtime:$libVersions.room"
+    kapt "androidx.room:room-compiler:$libVersions.room"
+    implementation "androidx.room:room-ktx:$libVersions.room"
+
     implementation "com.google.dagger:dagger:$libVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libVersions.dagger"
 

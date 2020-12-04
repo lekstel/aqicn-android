@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AQI</string>
+    <string name="filter_menu_item">Filters</string>
 </resources>
