@@ -52,6 +52,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$libVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libVersions.dagger"
 
+    implementation "com.facebook.stetho:stetho:$libVersions.stetho"
+
     testImplementation "junit:junit:$testingVersions.junit"
     androidTestImplementation "androidx.test.ext:junit:$testingVersions.androidJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testingVersions.espresso"

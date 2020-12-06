@@ -8,5 +8,10 @@ import com.lekstel.aqi.filters.data.cache.entity.FilterRadiusEntity
 
 @Database(entities = [FilterRadiusEntity::class, FilterMinQualityEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun filtersDao(): FiltersDao
+
+    companion object {
+        val DB_NAME = "aqi_android"
+    }
 }
