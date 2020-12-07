@@ -1,7 +1,7 @@
 package com.lekstel.aqi.filters.di.component
 
-import com.lekstel.aqi.filters.presentation.view_model.FiltersViewModelFactory
+import com.lekstel.aqi.filters.presentation.view.FiltersFragment
 
 interface FiltersComponentApi {
-    fun factory(): FiltersViewModelFactory
+    fun inject(fragment: FiltersFragment)
 }

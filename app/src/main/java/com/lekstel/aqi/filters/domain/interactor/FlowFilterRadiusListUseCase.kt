@@ -6,9 +6,11 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class FlowFiltersUseCase @Inject constructor(
+class FlowFilterRadiusListUseCase @Inject constructor(
         private val repository: IFiltersRepository
 ) {
+    private var job: Job? = null
+
     private val defaultRadiusFilters = listOf(
             FilterRadius(1, 5, false),
             FilterRadius(2, 10, false),
@@ -18,14 +20,21 @@ class FlowFiltersUseCase @Inject constructor(
     )
 
     fun execute(coroutineScope: CoroutineScope, collect: (next: List<FilterRadius>?, error: Throwable?) -> Unit) {
-        coroutineScope.launch {
+        job = coroutineScope.launch {
             try {
-                repository.flow().collect {
+                repository.flowFilterRadiusList().collect {
                     collect(it.takeIf { it.isNotEmpty() } ?: defaultRadiusFilters, null)
                 }
             } catch (e: Throwable) {
-                collect(null, e)
+                if (e !is CancellationException) {
+                    collect(null, e)
+                }
             }
         }
+    }
+
+    fun cancel() {
+        job?.cancel()
+        job = null
     }
 }
