@@ -10,18 +10,20 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FiltersRepository @Inject constructor(
-        private val localDataStore: IFiltersDataSource,
-        private val radiusMapper: FilterRadiusDtoMapper,
-        private val minQualityMapper: FilterMinQualityDtoMapper
+    private val localDataStore: IFiltersDataSource,
+    private val radiusMapper: FilterRadiusDtoMapper,
+    private val minQualityMapper: FilterMinQualityDtoMapper
 ) : IFiltersRepository {
 
-    override fun saveFilterRadiusList(list: List<FilterRadius>)
-            = localDataStore.saveFilterRadiusList(radiusMapper.reverse(list))
+    override fun saveFilterRadiusList(list: List<FilterRadius>) =
+        localDataStore.saveFilterRadiusList(radiusMapper.reverse(list))
 
-    override fun flowFilterRadiusList() = localDataStore.flowFilterRadiusList().map { radiusMapper.map(it) }
+    override fun flowFilterRadiusList() =
+        localDataStore.flowFilterRadiusList().map { radiusMapper.map(it) }
 
-    override fun saveFilterMinQualityList(list: List<FilterMinQuality>)
-            = localDataStore.saveFilterMinQualityList(minQualityMapper.reverse(list))
+    override fun saveFilterMinQualityList(list: List<FilterMinQuality>) =
+        localDataStore.saveFilterMinQualityList(minQualityMapper.reverse(list))
 
-    override fun flowFilterMinQualityList() = localDataStore.flowFilterMinQualityList().map { minQualityMapper.map(it) }
+    override fun flowFilterMinQualityList() =
+        localDataStore.flowFilterMinQualityList().map { minQualityMapper.map(it) }
 }

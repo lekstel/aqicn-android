@@ -9,16 +9,19 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FiltersLocalDataStore @Inject constructor(
-        private val cache: IFiltersCache,
-        private val radiusMapper: FilterRadiusEntityMapper,
-        private val minQualityMapper: FilterMinQualityDtoMapper
+    private val cache: IFiltersCache,
+    private val radiusMapper: FilterRadiusEntityMapper,
+    private val minQualityMapper: FilterMinQualityDtoMapper
 ) : IFiltersDataSource {
 
-    override fun saveFilterRadiusList(list: List<FilterRadiusDTO>) = cache.saveFilterRadiusList(radiusMapper.reverse(list))
+    override fun saveFilterRadiusList(list: List<FilterRadiusDTO>) =
+        cache.saveFilterRadiusList(radiusMapper.reverse(list))
 
     override fun flowFilterRadiusList() = cache.flowFilterRadiusList().map { radiusMapper.map(it) }
 
-    override fun saveFilterMinQualityList(list: List<FilterMinQualityDTO>) = cache.saveFilterMinQualityList(minQualityMapper.reverse(list))
+    override fun saveFilterMinQualityList(list: List<FilterMinQualityDTO>) =
+        cache.saveFilterMinQualityList(minQualityMapper.reverse(list))
 
-    override fun flowFilterMinQualityList() = cache.flowFilterMinQualityList().map { minQualityMapper.map(it) }
+    override fun flowFilterMinQualityList() =
+        cache.flowFilterMinQualityList().map { minQualityMapper.map(it) }
 }

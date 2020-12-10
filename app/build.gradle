@@ -52,6 +52,11 @@ dependencies {
     implementation "com.google.dagger:dagger:$libVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libVersions.dagger"
 
+    implementation "com.squareup.retrofit2:retrofit:$libVersions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$libVersions.retrofit"
+    implementation "com.google.maps.android:android-maps-utils:$libVersions.mapsUtils"
+    implementation "com.google.android.gms:play-services-maps:$libVersions.maps"
+
     implementation "com.facebook.stetho:stetho:$libVersions.stetho"
 
     testImplementation "junit:junit:$testingVersions.junit"

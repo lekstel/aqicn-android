@@ -11,10 +11,10 @@ import com.lekstel.aqi.R
 import com.lekstel.aqi.base.presentation.view.BaseBottomDialog
 import com.lekstel.aqi.base.presentation.view_model.DataModelViewState
 import com.lekstel.aqi.filters.di.component.FiltersComponent
+import com.lekstel.aqi.filters.domain.model.FilterMinQuality
 import com.lekstel.aqi.filters.domain.model.FilterRadius
 import com.lekstel.aqi.filters.presentation.view_model.FiltersViewModel
 import com.lekstel.aqi.filters.presentation.view_model.FiltersViewModelFactory
-import com.lekstel.aqi.main.ComponentCreator
 import kotlinx.android.synthetic.main.fragment_filters.*
 import javax.inject.Inject
 
@@ -28,27 +28,35 @@ class FiltersFragment : BaseBottomDialog() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ComponentCreator.createFiltersComponent()
         FiltersComponent.get().inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, factory).get(FiltersViewModel::class.java)
-        subscribeToFilters()
-        viewModel.flowRadiusFilterList()
+        subscribeToFilterRadiusList()
+        subscribeToFilterMinQualityList()
     }
 
-    private fun subscribeToFilters() {
+    private fun subscribeToFilterRadiusList() {
         viewModel.radiusFiltersViewState.observe(this, Observer<DataModelViewState<List<FilterRadius>>> { state ->
             state.data?.also {
+                viewModel.radiusFiltersViewState.removeObservers(this)
                 buildRadiusFilters(it)
-                listenRadioButtons()
             }
         })
     }
 
-    private fun listenRadioButtons() {
+    private fun subscribeToFilterMinQualityList() {
+        viewModel.minQualityFiltersViewState.observe(this, Observer<DataModelViewState<List<FilterMinQuality>>> { state ->
+            state.data?.also {
+                viewModel.minQualityFiltersViewState.removeObservers(this)
+                buildMinQualityFilters(it)
+            }
+        })
+    }
+
+    private fun listenRadiusRadioButtons() {
         radius_radio_group.setOnCheckedChangeListener { group, checkedId ->
             val selectedIndex = group.run { indexOfChild(findViewById(checkedId)) }
             val stateData = viewModel.radiusFiltersViewState.value?.data
@@ -57,7 +65,17 @@ class FiltersFragment : BaseBottomDialog() {
         }
     }
 
+    private fun listenMinQualityRadioButtons() {
+        aqi_radio_group.setOnCheckedChangeListener { group, checkedId ->
+            val selectedIndex = group.run { indexOfChild(findViewById(checkedId)) }
+            val stateData = viewModel.minQualityFiltersViewState.value?.data
+            val dataToSave = stateData?.mapIndexed { i, radius -> radius.copy(selected = i == selectedIndex) }
+            dataToSave?.also { viewModel.saveFilterMinQualityList(it) }
+        }
+    }
+
     private fun buildRadiusFilters(list: List<FilterRadius>) {
+        radius_radio_group.setOnCheckedChangeListener(null)
         radius_radio_group.removeAllViews()
         radius_tv.isVisible = list.isNotEmpty()
 
@@ -69,5 +87,24 @@ class FiltersFragment : BaseBottomDialog() {
                 radius_radio_group.addView(this)
             }
         }
+
+        listenRadiusRadioButtons()
+    }
+
+    private fun buildMinQualityFilters(list: List<FilterMinQuality>) {
+        aqi_radio_group.setOnCheckedChangeListener(null)
+        aqi_radio_group.removeAllViews()
+        aqi_tv.isVisible = list.isNotEmpty()
+
+        list.forEach {
+            RadioButton(requireContext()).apply {
+                text = it.minQuality.toString()
+                id = ViewCompat.generateViewId()
+                isChecked = it.selected
+                aqi_radio_group.addView(this)
+            }
+        }
+
+        listenMinQualityRadioButtons()
     }
 }
