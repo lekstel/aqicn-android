@@ -32,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -44,6 +47,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$libVersions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$libVersions.navigation"
     implementation "com.google.android.material:material:$libVersions.material"
+
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$libVersions.delegates"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$libVersions.delegates"
 
     implementation "androidx.room:room-runtime:$libVersions.room"
     kapt "androidx.room:room-compiler:$libVersions.room"

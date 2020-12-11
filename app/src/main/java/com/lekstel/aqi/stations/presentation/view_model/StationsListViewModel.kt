@@ -50,14 +50,14 @@ class StationsListViewModel @Inject constructor(
                 flowStationsUseCase.cancel()
                 flowStationsUseCase.execute(
                     viewModelScope,
-                    FlowStationsUseCase.Params(LatLng(39.824, 116.146), radius * 1000, minQuality)
+                    FlowStationsUseCase.Params(LatLng(50.438, 30.612), radius * 1000, minQuality)
                 ) { next, error ->
                     stationsViewState.postValue(DataModelViewState(false, error, next))
                 }
                 reloadViewState.postValue(DataModelViewState(true, null, Unit))
                 reloadStationsUseCase.execute(
                     viewModelScope,
-                    ReloadStationsUseCase.Params(LatLng(39.824, 116.146), radius * 1000, minQuality)
+                    ReloadStationsUseCase.Params(LatLng(50.438, 30.612), radius * 1000, minQuality)
                 ) { error ->
                     reloadViewState.postValue(DataModelViewState(false, error, Unit))
                 }

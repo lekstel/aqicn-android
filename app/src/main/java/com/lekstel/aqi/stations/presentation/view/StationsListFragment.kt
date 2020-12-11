@@ -7,14 +7,17 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lekstel.aqi.R
 import com.lekstel.aqi.base.presentation.view.BaseFragment
+import com.lekstel.aqi.base.presentation.view.adapter.DelegationAdapter
 import com.lekstel.aqi.base.presentation.view_model.DataModelViewState
 import com.lekstel.aqi.filters.domain.model.FilterMinQuality
 import com.lekstel.aqi.filters.domain.model.FilterRadius
 import com.lekstel.aqi.main.ComponentCreator
 import com.lekstel.aqi.stations.di.component.StationsComponent
 import com.lekstel.aqi.stations.domain.model.StationOnMap
+import com.lekstel.aqi.stations.presentation.view.adapter.StationsAdapter
 import com.lekstel.aqi.stations.presentation.view_model.StationsListViewModel
 import com.lekstel.aqi.stations.presentation.view_model.StationsListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_stations_list.*
@@ -29,6 +32,8 @@ class StationsListFragment : BaseFragment() {
     lateinit var factory: StationsListViewModelFactory
     private lateinit var viewModel: StationsListViewModel
 
+    private lateinit var delegationAdapter: DelegationAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ComponentCreator.createFiltersComponent()
@@ -39,6 +44,11 @@ class StationsListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, factory).get(StationsListViewModel::class.java)
+
+        delegationAdapter = StationsAdapter()
+        rv_stations.layoutManager = LinearLayoutManager(requireContext())
+        rv_stations.adapter = delegationAdapter
+
         subscribeToStations()
         subscribeToReloadState()
         subscribeToFilterRadiusList()
@@ -54,7 +64,7 @@ class StationsListFragment : BaseFragment() {
     private fun subscribeToStations() {
         viewModel.stationsViewState.observe(this, Observer<DataModelViewState<List<StationOnMap>>> { state ->
             state.data?.also {
-                tv_text.text = it.joinToString { "${it.uid}/${it.aqi}" }
+                delegationAdapter.items = it
             }
         })
     }

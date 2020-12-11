@@ -5,16 +5,16 @@
 
     <TextView
         android:id="@+id/tv_sync"
-        android:text="sync..."
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:text="sync..."
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/tv_text"
-        android:layout_marginTop="30dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_stations"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp" />
 
 </FrameLayout>

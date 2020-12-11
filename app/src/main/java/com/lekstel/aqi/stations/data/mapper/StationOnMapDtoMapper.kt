@@ -9,7 +9,7 @@ class StationOnMapDtoMapper @Inject constructor() : BaseMapper<StationOnMapDTO, 
 
     override fun map(from: StationOnMapDTO) = from.run {
         StationOnMap(
-            uid = uid,
+            id = uid,
             lat = lat,
             lon = lon,
             aqi = aqi,
@@ -20,7 +20,7 @@ class StationOnMapDtoMapper @Inject constructor() : BaseMapper<StationOnMapDTO, 
 
     override fun reverse(to: StationOnMap) = to.run {
         StationOnMapDTO(
-            uid = uid,
+            uid = id,
             lat = lat,
             lon = lon,
             aqi = aqi,
