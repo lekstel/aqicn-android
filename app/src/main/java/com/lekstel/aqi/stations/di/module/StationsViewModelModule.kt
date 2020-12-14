@@ -2,6 +2,7 @@ package com.lekstel.aqi.stations.di.module
 
 import androidx.lifecycle.ViewModel
 import com.lekstel.aqi.base.di.qualifier.ViewModelKey
+import com.lekstel.aqi.stations.presentation.view_model.StationDetailsViewModel
 import com.lekstel.aqi.stations.presentation.view_model.StationsListViewModel
 import dagger.Binds
 import dagger.Module
@@ -14,4 +15,9 @@ abstract class StationsViewModelModule {
     @IntoMap
     @ViewModelKey(StationsListViewModel::class)
     abstract fun bindStationsListViewModel(viewModel: StationsListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StationDetailsViewModel::class)
+    abstract fun bindStationDetailsViewModel(viewModel: StationDetailsViewModel): ViewModel
 }

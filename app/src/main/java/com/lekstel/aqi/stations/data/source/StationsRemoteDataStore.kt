@@ -1,6 +1,7 @@
 package com.lekstel.aqi.stations.data.source
 
 import com.google.android.gms.maps.model.LatLng
+import com.lekstel.aqi.stations.data.model.StationDetailsDTO
 import com.lekstel.aqi.stations.data.model.StationOnMapDTO
 import com.lekstel.aqi.stations.data.network.AqiService
 import com.lekstel.aqi.utils.boundsString
@@ -16,4 +17,8 @@ class StationsRemoteDataStore @Inject constructor(
     override fun flowStations(latLng: LatLng, radius: Int, minQuality: Int) = error("not supported")
 
     override suspend fun saveStations(stations: List<StationOnMapDTO>) = error("not supported")
+
+    override suspend fun getStationDetails(id: Int) = api.getStationDetails(id).data
+
+    override suspend fun saveStationsDetails(details: StationDetailsDTO) = error("not supported")
 }

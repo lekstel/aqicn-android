@@ -13,7 +13,16 @@
         <action
             android:id="@+id/stationsListFragment_to_filtersFragment"
             app:destination="@+id/filtersFragment" />
+        <action
+            android:id="@+id/stationsListFragment_to_stationDetailsFragment"
+            app:destination="@+id/stationDetailsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/stationDetailsFragment"
+        android:name="com.lekstel.aqi.stations.presentation.view.StationDetailsFragment"
+        android:label="fragment_station_details"
+        tools:layout="@layout/fragment_station_details" />
 
     <dialog
         android:id="@+id/filtersFragment"

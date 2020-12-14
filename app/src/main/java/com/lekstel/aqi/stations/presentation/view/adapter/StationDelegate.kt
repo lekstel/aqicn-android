@@ -7,19 +7,21 @@ import com.lekstel.aqi.base.presentation.view.adapter.bindWithPayloadActions
 import com.lekstel.aqi.stations.domain.model.StationOnMap
 import kotlinx.android.synthetic.main.item_station.*
 
-fun stationAdapterDelegate() =
+fun stationAdapterDelegate(itemClickListener : (StationOnMap) -> Unit) =
     adapterDelegateLayoutContainer<StationOnMap, BaseListItem>(R.layout.item_station) {
 
+        item_root.setOnClickListener { itemClickListener(item) }
+
         fun updateId(item: StationOnMap) {
-            tv_id.text = item.id.toString()
+            tv_id.text = getString(R.string.list_id, item.id)
         }
 
         fun updateName(item: StationOnMap) {
-            tv_name.text = item.name
+            tv_name.text = getString(R.string.list_name, item.name)
         }
 
         fun updateAqi(item: StationOnMap) {
-            tv_aqi.text = item.aqi
+            tv_aqi.text = getString(R.string.list_aqi, item.aqi)
         }
 
         val payloadActions = mapOf(

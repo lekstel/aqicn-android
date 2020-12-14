@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">AQI</string>
+
     <string name="filter_menu_item">Filters</string>
     <string name="filters_dialog_radius">Coverage radius (km)</string>
     <string name="filters_dialog_min_aqi">Min level of AQI (air quality index)</string>
+
+    <string name="details_name">Name:\n%s</string>
+    <string name="details_coordinates">Coordinates:\n%s</string>
+    <string name="details_time">Last updated at: %s</string>
+    <string name="details_pm25">pm 2.5: %s</string>
+    <string name="details_pm10">pm 10: %s</string>
+
+    <string name="list_name">Name: %s</string>
+    <string name="list_id">Id: %d</string>
+    <string name="list_aqi">AQI: %s</string>
+
 </resources>

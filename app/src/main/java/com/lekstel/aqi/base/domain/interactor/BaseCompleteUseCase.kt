@@ -9,6 +9,7 @@ abstract class BaseCompleteUseCase<P> : BaseUseCase() {
     protected abstract suspend fun onLaunch(params: P)
 
     fun execute(coroutineScope: CoroutineScope, params: P, observe: (error: Throwable?) -> Unit) {
+        scope = coroutineScope
         job = coroutineScope.launch(launchDispatcher) {
             try {
                 onLaunch(params)

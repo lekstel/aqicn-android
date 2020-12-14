@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lekstel.aqi.R
 import com.lekstel.aqi.base.presentation.view.BaseFragment
@@ -17,7 +18,9 @@ import com.lekstel.aqi.filters.domain.model.FilterRadius
 import com.lekstel.aqi.main.ComponentCreator
 import com.lekstel.aqi.stations.di.component.StationsComponent
 import com.lekstel.aqi.stations.domain.model.StationOnMap
+import com.lekstel.aqi.stations.presentation.view.StationDetailsFragment.Companion.ID_KEY
 import com.lekstel.aqi.stations.presentation.view.adapter.StationsAdapter
+import com.lekstel.aqi.stations.presentation.view.adapter.stationAdapterDelegate
 import com.lekstel.aqi.stations.presentation.view_model.StationsListViewModel
 import com.lekstel.aqi.stations.presentation.view_model.StationsListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_stations_list.*
@@ -46,6 +49,11 @@ class StationsListFragment : BaseFragment() {
         viewModel = ViewModelProvider(this, factory).get(StationsListViewModel::class.java)
 
         delegationAdapter = StationsAdapter()
+        delegationAdapter.addDelegate(stationAdapterDelegate {
+            findNavController().navigate(R.id.stationsListFragment_to_stationDetailsFragment,
+                    Bundle().apply { putInt(ID_KEY, it.id) })
+        })
+        rv_stations.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         rv_stations.layoutManager = LinearLayoutManager(requireContext())
         rv_stations.adapter = delegationAdapter
 

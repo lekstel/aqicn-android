@@ -7,7 +7,7 @@ import com.lekstel.aqi.stations.data.cache.entity.StationOnMapEntity.Companion.T
 @Entity(tableName = TABLE_NAME)
 data class StationOnMapEntity(
     @PrimaryKey
-    val uid: Long,
+    val uid: Int,
     val lat: Double,
     val lon: Double,
     val aqi: String,
