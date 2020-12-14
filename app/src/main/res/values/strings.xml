@@ -15,4 +15,7 @@
     <string name="list_id">Id: %d</string>
     <string name="list_aqi">AQI: %s</string>
 
+    <string name="toast_permission_granted">you have got permissions!</string>
+    <string name="toast_permission_denied">you need location permission to load stations info!</string>
+
 </resources>

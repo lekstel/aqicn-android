@@ -51,6 +51,8 @@ dependencies {
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$libVersions.delegates"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$libVersions.delegates"
 
+    implementation "com.google.android.gms:play-services-location:$libVersions.location"
+
     implementation "androidx.room:room-runtime:$libVersions.room"
     kapt "androidx.room:room-compiler:$libVersions.room"
     implementation "androidx.room:room-ktx:$libVersions.room"

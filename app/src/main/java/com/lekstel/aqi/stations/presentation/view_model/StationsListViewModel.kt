@@ -1,5 +1,6 @@
 package com.lekstel.aqi.stations.presentation.view_model
 
+import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +21,12 @@ class StationsListViewModel @Inject constructor(
     private val flowFilterRadiusListUseCase: FlowFilterRadiusListUseCase,
     private val flowFilterMinQualityListUseCase: FlowFilterMinQualityListUseCase
 ) : ViewModel() {
+
+    var location: Location? = null
+        set(value) {
+            field = value
+            flowAndReload()
+        }
 
     val radiusFiltersViewState by lazy {
         MutableLiveData<DataModelViewState<List<FilterRadius>>>().also { flowRadiusFilterList() }
@@ -46,20 +53,22 @@ class StationsListViewModel @Inject constructor(
     fun flowAndReload() {
         filterRadius()?.let { radius ->
             filterMinQuality()?.let { minQuality ->
-                reloadStationsUseCase.cancel()
-                flowStationsUseCase.cancel()
-                flowStationsUseCase.execute(
-                    viewModelScope,
-                    FlowStationsUseCase.Params(LatLng(50.438, 30.612), radius * 1000, minQuality)
-                ) { next, error ->
-                    stationsViewState.postValue(DataModelViewState(false, error, next))
-                }
-                reloadViewState.postValue(DataModelViewState(true, null, Unit))
-                reloadStationsUseCase.execute(
-                    viewModelScope,
-                    ReloadStationsUseCase.Params(LatLng(50.438, 30.612), radius * 1000, minQuality)
-                ) { error ->
-                    reloadViewState.postValue(DataModelViewState(false, error, Unit))
+                location?.let { location ->
+                    reloadStationsUseCase.cancel()
+                    flowStationsUseCase.cancel()
+                    flowStationsUseCase.execute(
+                        viewModelScope,
+                        FlowStationsUseCase.Params(location.run { LatLng(latitude, longitude) }, radius * 1000, minQuality)
+                    ) { next, error ->
+                        stationsViewState.postValue(DataModelViewState(false, error, next))
+                    }
+                    reloadViewState.postValue(DataModelViewState(true, null, Unit))
+                    reloadStationsUseCase.execute(
+                        viewModelScope,
+                        ReloadStationsUseCase.Params(location.run { LatLng(latitude, longitude) }, radius * 1000, minQuality)
+                    ) { error ->
+                        reloadViewState.postValue(DataModelViewState(false, error, Unit))
+                    }
                 }
             }
         }
