@@ -14,7 +14,7 @@ class StationsCache @Inject constructor(
 
     override fun flowStations(latLng: LatLng, radius: Int, minQuality: Int) =
             database.stationsDao().flowStations().map { list ->
-                list.filter { latLng.bounds(radius).contains(it.latLng()) && it.aqi.toInt() >= minQuality }
+                list.filter { latLng.bounds(radius).contains(it.latLng()) && it.filterByMinQuality(minQuality) }
             }
 
     override suspend fun saveStations(stations: List<StationOnMapEntity>) =
@@ -27,4 +27,6 @@ class StationsCache @Inject constructor(
             database.stationsDao().saveStationsDetails(details)
 
     private fun StationOnMapEntity.latLng() = LatLng(lat, lon)
+
+    private fun StationOnMapEntity.filterByMinQuality(minQuality: Int) = aqi.none { it.isDigit() } || aqi.toInt() >= minQuality
 }
