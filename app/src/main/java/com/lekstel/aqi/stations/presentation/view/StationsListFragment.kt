@@ -120,7 +120,12 @@ class StationsListFragment : BaseFragment() {
 
     @SuppressLint("MissingPermission")
     private fun handleLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener { viewModel.location = it }
+        fusedLocationClient.lastLocation.addOnSuccessListener {
+            viewModel.location = it
+            if (it == null) {
+                Toast.makeText(requireContext(), R.string.toast_can_t_get_location, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun permissionGranted() = ContextCompat.checkSelfPermission(requireContext(),

@@ -25,6 +25,7 @@ ext {
             navigation                      : '2.3.2',
             retrofit                        : '2.9.0',
             room                            : '2.2.5',
+            testRules                       : '1.0.2',
             stetho                          : '1.5.1'
     ]
 

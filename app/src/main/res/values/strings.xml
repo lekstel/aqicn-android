@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">AQI</string>
 
+    <string name="title_list">Stations</string>
+    <string name="title_details">Details</string>
+
     <string name="filter_menu_item">Filters</string>
     <string name="filters_dialog_radius">Coverage radius (km)</string>
     <string name="filters_dialog_min_aqi">Min level of AQI (air quality index)</string>
@@ -17,5 +20,6 @@
 
     <string name="toast_permission_granted">you have got permissions!</string>
     <string name="toast_permission_denied">you need location permission to load stations info!</string>
+    <string name="toast_can_t_get_location">cannot get location!</string>
 
 </resources>

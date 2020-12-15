@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/stationsListFragment"
         android:name="com.lekstel.aqi.stations.presentation.view.StationsListFragment"
-        android:label="fragment_stations_list"
+        android:label="@string/title_list"
         tools:layout="@layout/fragment_stations_list">
         <action
             android:id="@+id/stationsListFragment_to_filtersFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/stationDetailsFragment"
         android:name="com.lekstel.aqi.stations.presentation.view.StationDetailsFragment"
-        android:label="fragment_station_details"
+        android:label="@string/title_details"
         tools:layout="@layout/fragment_station_details" />
 
     <dialog
