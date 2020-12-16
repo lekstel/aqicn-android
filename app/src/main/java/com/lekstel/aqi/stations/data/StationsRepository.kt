@@ -32,6 +32,7 @@ class StationsRepository @Inject constructor(
 
     override suspend fun getStationDetails(id: Int) = kotlin.runCatching { remoteDataStore.getStationDetails(id) }
             .onSuccess { it?.let { saveStationsDetails(detailsDtoMapper.map(it)) } }
+            .map { it ?: localDataStore.getStationDetails(id) }
             .getOrElse { localDataStore.getStationDetails(id) }
             ?.let { detailsDtoMapper.map(it) }
 

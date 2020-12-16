@@ -68,6 +68,9 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$libVersions.stetho"
 
     testImplementation "junit:junit:$testingVersions.junit"
+    testImplementation "org.mockito:mockito-inline:$testingVersions.mockito"
+    testImplementation "org.mockito:mockito-android:$testingVersions.mockito"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testingVersions.mockitokotlin"
     androidTestImplementation "androidx.test.ext:junit:$testingVersions.androidJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testingVersions.espresso"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$testingVersions.espresso"

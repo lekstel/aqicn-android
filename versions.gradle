@@ -25,13 +25,15 @@ ext {
             navigation                      : '2.3.2',
             retrofit                        : '2.9.0',
             room                            : '2.2.5',
-            testRules                       : '1.0.2',
             stetho                          : '1.5.1'
     ]
 
     testingVersions = [
             junit                           : '4.13.1',
             androidJunit                    : '1.1.2',
-            espresso                        : '3.3.0'
+            espresso                        : '3.3.0',
+            mockito                         : '3.2.4',
+            mockitokotlin                   : '2.2.0',
+            testRules                       : '1.0.2'
     ]
 }
